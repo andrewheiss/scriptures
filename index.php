@@ -1,5 +1,11 @@
 <?php 
 
+/* Scriptures reader
+   by Ben Crowder and Chad Hansen
+
+   2009
+*/
+
 include_once('include/config.php');
 include_once('include/db.php');
 
