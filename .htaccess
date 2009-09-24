@@ -1,0 +1,6 @@
+RewriteEngine On
+# RewriteBase /
+RewriteRule ^([^/\.]+)/([0-9]+)/?$ index.php?book=$1&chapter=$2
+# RewriteRule ^index.php$ page.php?id=home
+
+ErrorDocument 404 index.php

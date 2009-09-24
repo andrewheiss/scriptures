@@ -1,0 +1,23 @@
+body 											{ margin: 0; padding: 0; font-family: Georgia; border-top: solid 20px black; }
+
+#banner 										{ background: url(bannerbg.jpg) repeat-x; height: 75px; background: #2e2e50; color: #fff; }
+#banner_container								{ margin: 0px auto; width: 650px; text-align: center; font-size: 1.9em; padding-top: 10px; letter-spacing: -0.02em; }
+#banner_subtitle								{ font-size: .5em; font-variant: small-caps; letter-spacing: 0.02em; }
+
+#loc											{ width: 650px; margin: 0px auto; text-align: center; margin-top: 15px; color: #999; border-bottom: solid 1px #ccc; padding-bottom: 15px; }
+#loc a											{ color: #666; text-decoration: none; border-bottom: dotted 1px #666; }
+a#loclink										{ color: #000; font-size: 1.3em; border: none; font-weight: bold; font-variant: small-caps; }
+#prevlink										{ float: left; }
+#nextlink										{ float: right; }
+
+#page 											{ width: 650px; margin: 0px auto; padding-top: 35px; }
+
+.verse											{ font-size: 1.4em; margin-bottom: .25em; line-height: 1.25em; letter-spacing: -0.015em; text-indent: 1.5em; margin-left: 60px; padding: 5px; }
+.versenum										{ font-size: 1.4em; color: #ccc; float: left; padding: 5px 0; }
+.context										{ font-size: 1.1em; color: #ccc; }
+
+#nav											{ width: 650px; margin: 0px auto; text-align: center; margin-bottom: 100px; border-top: solid 1px #ccc; padding-top: 15px; margin-top: 40px; font-family: "Lucida Grande", Arial, Helvetica; font-size: .7em; }
+#nav a											{ color: #000; text-decoration: none; border-bottom: dotted 1px #000; }
+#aboutlink										{ margin-top: 5px; }
+
+.selected										{ background: #f6f6f6; -moz-border-radius: 5px; -khtml-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; }
