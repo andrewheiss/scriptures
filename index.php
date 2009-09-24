@@ -9,8 +9,6 @@
 include_once('include/config.php');
 include_once('include/db.php');
 
-$siteroot = "http://bencrowder.net/scriptures";
-
 // Get the page we want to load/edit
 $bookname = trim($_GET["book"]);
 $chapter = trim($_GET["chapter"]);

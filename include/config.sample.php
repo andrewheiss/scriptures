@@ -5,4 +5,6 @@ $database = "dbname";
 $username = "username";
 $password = "password";
 
+$siteroot = "yoururlhere";
+
 ?>
