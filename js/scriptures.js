@@ -109,6 +109,8 @@ function openConsole() {
 	$(document).unbind('keydown', 'g', openConsole);
 	$(document).bind('keydown', 'esc', closeConsole);
 	$(document).bind('keydown', 'return', goToLoc);
+	$(document).bind('keydown', 'up', prevSel);
+	$(document).bind('keydown', 'down', nextSel);
 
 	return false;
 }
@@ -116,9 +118,12 @@ function openConsole() {
 function closeConsole() {
 	$("#shroud").fadeOut(100);
 	$("#console").fadeOut(100);
+
 	$(document).bind('keydown', 'g', openConsole);
 	$(document).unbind('keydown', 'esc', closeConsole);
 	$(document).unbind('keydown', 'return', goToLoc);
+	$(document).unbind('keydown', 'up', prevSel);
+	$(document).unbind('keydown', 'down', nextSel);
 
 	bindShortcuts();
 
@@ -127,4 +132,20 @@ function closeConsole() {
 
 function goToLoc() {
 
+}
+
+function nextSel() {
+	var cur = $("li.sel");
+	if (cur.next()[0]) {
+		cur.removeClass("sel");
+		cur.next().addClass("sel");
+	}
+}
+
+function prevSel() {
+	var cur = $("li.sel");
+	if (cur.prev()[0]) {
+		cur.removeClass("sel");
+		cur.prev().addClass("sel");
+	}
 }
