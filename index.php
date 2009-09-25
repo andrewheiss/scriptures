@@ -12,7 +12,10 @@ include_once('include/db.php');
 // Get the page we want to load/edit
 $bookname = trim($_GET["book"]);
 $chapter = trim($_GET["chapter"]);
-$verse = trim($_GET["verse"]);
+$verse = (isset($_GET["verse"])) ? trim($_GET['verse']) : "";
+
+$highlight = false;
+if ($verse != "") $highlight = true;
 
 if (!$chapter || $chapter < 1 || $chapter == "") $chapter = 1;
 if (!$verse || $verse < 1 || $verse == "") $verse = 1;
@@ -23,13 +26,14 @@ if ($bookname != "") // if a book is specified
 
 	// First off, let's figure out what book we're in
 
-	$query = "SELECT book_id, book_title, volume_title_long, volume_subtitle FROM lds_scriptures_books INNER JOIN lds_scriptures_volumes ON lds_scriptures_volumes.volume_id = lds_scriptures_books.volume_id WHERE lds_scriptures_books.lds_org='$bookname'";
+	$query = "SELECT book_id, book_title, volume_title_long, volume_subtitle, b.num_chapters FROM lds_scriptures_books b INNER JOIN lds_scriptures_volumes v ON v.volume_id = b.volume_id WHERE b.lds_org='$bookname'";
 	$result = mysql_query($query) or die ("Couldn't run: $query");
 
 	$bookid = trim(mysql_result($result, 0, "book_id"));
 	$booktitle = trim(mysql_result($result, 0, "book_title"));
 	$volume = trim(mysql_result($result, 0, "volume_title_long"));
 	$volume_subtitle = trim(mysql_result($result, 0, "volume_subtitle"));
+	$num_chapters = trim(mysql_result($result, 0, "num_chapters"));
 
 	// Now get the verses
 
@@ -45,7 +49,8 @@ if ($bookname != "") // if a book is specified
 
 	// Now figure out what comes before and after
 	if ($chapter > 1) $prevchapter = $chapter - 1;
-	$nextchapter = $chapter + 1;
+	if ($chapter + 1 <= $num_chapters) $nextchapter = $chapter + 1;
+	else $nextchapter = $chapter;
 
 	$prevurl = "$siteroot/$bookname/$prevchapter";
 	$nexturl = "$siteroot/$bookname/$nextchapter";
@@ -86,6 +91,7 @@ if ($bookname != "") // if a book is specified
 					echo "\t<div class='versenum'>$versenum</div>\n";
 					echo "\t<div id='v_$versenum' class='verse";
 					if ($versenum == $verse) echo " selected";
+					if ($highlight && $versenum == $verse) echo " highlight";
 					echo "'>$versetext</div>\n";
 					echo "<input id='vtag_$versenum' type='hidden' />\n";
 					echo "\n";
