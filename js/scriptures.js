@@ -19,7 +19,7 @@ function bindShortcuts() {
 	$(document).bind('keydown', 'k', prevVerse);
 
 	$(document).bind('keydown', 'r', randomChapter);
-	$(document).bind('keydown', 't', jumpToTOC);
+	$(document).bind('keydown', 't', goToTOC);
 }
 
 function unbindShortcuts() {
@@ -30,14 +30,14 @@ function unbindShortcuts() {
 	$(document).unbind('keydown', 'k', prevVerse);
 
 	$(document).unbind('keydown', 'r', randomChapter);
-	$(document).unbind('keydown', 't', jumpToTOC);
+	$(document).unbind('keydown', 't', goToTOC);
 }
 
 function randomChapter() {
 	document.location.href = siteroot + "/random.php";
 }
 
-function jumpToTOC() {
+function goToTOC() {
 	document.location.href = siteroot + "/toc.php";
 }
 
@@ -108,7 +108,7 @@ function openConsole() {
 	// Unbind the g-key and bind the escape
 	$(document).unbind('keydown', 'g', openConsole);
 	$(document).bind('keydown', 'esc', closeConsole);
-	$(document).bind('keydown', 'return', jumpToLoc);
+	$(document).bind('keydown', 'return', goToLoc);
 
 	return false;
 }
@@ -118,13 +118,13 @@ function closeConsole() {
 	$("#console").fadeOut(100);
 	$(document).bind('keydown', 'g', openConsole);
 	$(document).unbind('keydown', 'esc', closeConsole);
-	$(document).unbind('keydown', 'return', jumpToLoc);
+	$(document).unbind('keydown', 'return', goToLoc);
 
 	bindShortcuts();
 
 	return false;
 }
 
-function jumpToLoc() {
+function goToLoc() {
 
 }
