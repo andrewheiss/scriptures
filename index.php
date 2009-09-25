@@ -57,9 +57,18 @@ if ($bookname != "") // if a book is specified
 	<div id="shroud" style="display: none"></div>
 	<div id="console" style="display: none">
 		<div id="console_back"></div>
-		<div id="console_title">Go to:</div>
 		<div id="console_entry">
+			<div id="console_title">Go to:</div>
 			<input type="text" id="console_input" name="console_input" />
+		</div>
+		<div id="console_dropdown">
+			<ul>
+				<li>1 Nephi</li>
+				<li class="sel">2 Nephi</li>
+				<li>3 Nephi</li>
+				<li>4 Nephi</li>
+				<li>Nehemiah</li>
+			</ul>
 		</div>
 	</div>
 
