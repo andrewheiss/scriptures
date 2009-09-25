@@ -16,11 +16,12 @@ $num = mysql_escape_string((isset($_REQUEST['num'])) ? $_REQUEST['num'] : '5');
  * 5. PoGP
  */
 $sql =<<<SQL
-	SELECT *
-	FROM lds_scriptures_books
-	WHERE book_title REGEXP '(^$book.+|[0-9] $book.+)' 
-		OR book_title_short REGEXP '(^$book.+|[0-9] $book.+)'
-	LIMIT $num
+	SELECT b.*, v.priority
+	FROM lds_scriptures_books b, lds_scriptures_volumes v
+	WHERE b.volume_id=v.volume_id 
+		AND (b.book_title REGEXP '(^$book.+|[0-9] $book.+)' OR b.book_title_short REGEXP '(^$book.+|[0-9] $book.+)')
+	ORDER BY v.priority, b.book_title
+	LIMIT $num 
 SQL;
 
 $results = mysql_query($sql, $conn) or die('Something went wrong! ' . mysql_error());

@@ -17,40 +17,42 @@ $verse = trim($_GET["verse"]);
 if (!$chapter || $chapter < 1 || $chapter == "") $chapter = 1;
 if (!$verse || $verse < 1 || $verse == "") $verse = 1;
 
-db_connect($host, $username, $password, $database);
-
-// First off, let's figure out what book we're in
-
-$query = "SELECT book_id, book_title, volume_title_long, volume_subtitle FROM lds_scriptures_books INNER JOIN lds_scriptures_volumes ON lds_scriptures_volumes.volume_id = lds_scriptures_books.volume_id WHERE lds_scriptures_books.lds_org='$bookname'";
-$result = mysql_query($query) or die ("Couldn't run: $query");
-
-$bookid = trim(mysql_result($result, 0, "book_id"));
-$booktitle = trim(mysql_result($result, 0, "book_title"));
-$volume = trim(mysql_result($result, 0, "volume_title_long"));
-$volume_subtitle = trim(mysql_result($result, 0, "volume_subtitle"));
-
-// Now get the verses
-
-$query = "SELECT chapter, verse, verse_scripture FROM lds_scriptures_verses WHERE book_id=$bookid AND chapter=$chapter";
-$result = mysql_query($query) or die ("Couldn't run: $query");
-
-$verses = array();
-
-while ($row = mysql_fetch_assoc($result))
+if ($bookname != "") // if a book is specified
 {
-	array_push($verses, $row);
-}
+	db_connect($host, $username, $password, $database);
 
-// Now figure out what comes before and after
-if ($chapter > 1) $prevchapter = $chapter - 1;
-$nextchapter = $chapter + 1;
+	// First off, let's figure out what book we're in
 
-$prevurl = "$siteroot/$bookname/$prevchapter";
-$nexturl = "$siteroot/$bookname/$nextchapter";
+	$query = "SELECT book_id, book_title, volume_title_long, volume_subtitle FROM lds_scriptures_books INNER JOIN lds_scriptures_volumes ON lds_scriptures_volumes.volume_id = lds_scriptures_books.volume_id WHERE lds_scriptures_books.lds_org='$bookname'";
+	$result = mysql_query($query) or die ("Couldn't run: $query");
 
-db_close();
+	$bookid = trim(mysql_result($result, 0, "book_id"));
+	$booktitle = trim(mysql_result($result, 0, "book_title"));
+	$volume = trim(mysql_result($result, 0, "volume_title_long"));
+	$volume_subtitle = trim(mysql_result($result, 0, "volume_subtitle"));
 
-include("header.php");
+	// Now get the verses
+
+	$query = "SELECT chapter, verse, verse_scripture FROM lds_scriptures_verses WHERE book_id=$bookid AND chapter=$chapter";
+	$result = mysql_query($query) or die ("Couldn't run: $query");
+
+	$verses = array();
+
+	while ($row = mysql_fetch_assoc($result))
+	{
+		array_push($verses, $row);
+	}
+
+	// Now figure out what comes before and after
+	if ($chapter > 1) $prevchapter = $chapter - 1;
+	$nextchapter = $chapter + 1;
+
+	$prevurl = "$siteroot/$bookname/$prevchapter";
+	$nexturl = "$siteroot/$bookname/$nextchapter";
+
+	db_close();
+
+	include("header.php");
 ?>
 	<div id="banner"><div id="banner_container"><?php echo $volume; ?><?php if ($volume_subtitle) { ?><div id="banner_subtitle"><?php echo $volume_subtitle; ?></div><?php } ?></div></div>
 	
@@ -75,3 +77,11 @@ include("header.php");
 	</div>
 
 <?php include("footer.php"); ?>
+<?php
+}
+else // if no book is specified include the static toc
+{
+	// toc
+	include("toc.php");
+}
+?>
