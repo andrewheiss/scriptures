@@ -54,6 +54,14 @@ if ($bookname != "") // if a book is specified
 
 	include("header.php");
 ?>
+	<div id="console" style="display: none">
+		<div id="console_back"></div>
+		<div id="console_title">Go to page:</div>
+		<div id="console_entry">
+			<input type="text" id="console_input" name="console_input" />
+		</div>
+	</div>
+
 	<div id="banner"><div id="banner_container"><?php echo $volume; ?><?php if ($volume_subtitle) { ?><div id="banner_subtitle"><?php echo $volume_subtitle; ?></div><?php } ?></div></div>
 	
 	<div id="loc"><a href="<?php echo $prevurl; ?>" id="prevlink">&laquo; Prev</a><a href="<?php echo $nexturl; ?>" id="nextlink">Next &raquo;</a><a href="index.php?chapter=<?php echo $chapter; ?>" id="loclink"><?php echo $booktitle; ?> <?php echo $chapter; ?></a></div>

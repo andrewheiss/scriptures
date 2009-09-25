@@ -9,6 +9,9 @@
 	<script src="<?php echo $siteroot; ?>/js/jquery-1.3.1.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="<?php echo $siteroot; ?>/js/jquery.hotkeys-0.7.8-packed.js" type="text/javascript" charset="utf-8"></script>
 	<script src="<?php echo $siteroot; ?>/js/scriptures.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		var siteroot = "<?php echo $siteroot; ?>";
+	</script>
 </head>
 
 <body>

@@ -3,13 +3,43 @@
 
 
 $(document).ready(function() {
-	// Key bindings
+	bindShortcuts();
+
+	$(document).bind('keydown', 'g', openConsole);
+
+	var vnum = parseInt($(".selected").attr("id").split('_')[1]);
+	scrollToVerse(vnum, true);
+});
+
+function bindShortcuts() {
 	$(document).bind('keydown', 'n', nextChapter);
 	$(document).bind('keydown', 'p', prevChapter);
 
 	$(document).bind('keydown', 'j', nextVerse);
 	$(document).bind('keydown', 'k', prevVerse);
-});
+
+	$(document).bind('keydown', 'r', randomChapter);
+	$(document).bind('keydown', 't', jumpToTOC);
+}
+
+function unbindShortcuts() {
+	$(document).unbind('keydown', 'n', nextChapter);
+	$(document).unbind('keydown', 'p', prevChapter);
+
+	$(document).unbind('keydown', 'j', nextVerse);
+	$(document).unbind('keydown', 'k', prevVerse);
+
+	$(document).unbind('keydown', 'r', randomChapter);
+	$(document).unbind('keydown', 't', jumpToTOC);
+}
+
+function randomChapter() {
+	document.location.href = siteroot + "/random.php";
+}
+
+function jumpToTOC() {
+	document.location.href = siteroot + "/toc.php";
+}
 
 function nextChapter() {
 	document.location.href = $("#nextlink").attr("href");
@@ -42,12 +72,13 @@ function scrollToVerse(vnum, forward) {
 	cur.removeClass("selected");
 	$("#v_" + vnum).addClass("selected");
 
-	var offset = (window.innerHeight / 2) - 100;
+	var oldOffset = (window.innerHeight / 2) - 70 - (cur[0].scrollHeight / 2);
+	var newOffset = (window.innerHeight / 2) - 70 - ($("#v_" + vnum)[0].scrollHeight / 2);
 
-	var oldY = cur.attr("offsetTop") - offset;
-	var newY = $("#v_" + vnum).attr("offsetTop") - offset;
+	var oldY = cur.attr("offsetTop") - oldOffset;
+	var newY = $("#v_" + vnum).attr("offsetTop") - newOffset;
 
-	var scrollspeed = 3;
+	var scrollspeed = 4;
 
 	if (forward) {
 		for (var i = oldY; i < newY; i += scrollspeed) {
@@ -60,4 +91,39 @@ function scrollToVerse(vnum, forward) {
 	}
 
 	window.scroll(0, newY);
+}
+
+function openConsole() {
+	// Open the console
+	$("#console").show();
+
+	// Focus on the input
+	$("#console_input").focus();
+
+	// Clear out the text field
+	$("#console_input").val("");
+
+	unbindShortcuts();
+
+	// Unbind the g-key and bind the escape
+	$(document).unbind('keydown', 'g', openConsole);
+	$(document).bind('keydown', 'esc', closeConsole);
+	$(document).bind('keydown', 'return', jumpToLoc);
+
+	return false;
+}
+
+function closeConsole() {
+	$("#console").hide();
+	$(document).bind('keydown', 'g', openConsole);
+	$(document).unbind('keydown', 'esc', closeConsole);
+	$(document).unbind('keydown', 'return', jumpToLoc);
+
+	bindShortcuts();
+
+	return false;
+}
+
+function jumpToLoc() {
+
 }
