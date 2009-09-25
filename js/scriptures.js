@@ -95,9 +95,7 @@ function scrollToVerse(vnum, forward) {
 
 function openConsole() {
 	$("#shroud").fadeIn(100);
-
-	// Open the console
-	$("#console").show();
+	$("#console").fadeIn(100);
 
 	// Focus on the input
 	$("#console_input").focus();
@@ -117,7 +115,7 @@ function openConsole() {
 
 function closeConsole() {
 	$("#shroud").fadeOut(100);
-	$("#console").hide();
+	$("#console").fadeOut(100);
 	$(document).bind('keydown', 'g', openConsole);
 	$(document).unbind('keydown', 'esc', closeConsole);
 	$(document).unbind('keydown', 'return', jumpToLoc);
