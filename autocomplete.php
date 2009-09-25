@@ -1,6 +1,8 @@
 <?php
-$conn = mysql_connect('bomdb.imetchad.org', 'lds_scriptures', 'm0rm0n') or die('Something went wrong!' . mysql_error());
-mysql_select_db('lds_scriptures', $conn) or die('Something went wrong!' . mysql_error());
+include("include/config.php");
+include("include/db.php");
+
+$conn = db_connect($host, $username, $password, $database);
 
 $query = explode(' ', $_REQUEST['query']);
 
@@ -25,6 +27,7 @@ $sql =<<<SQL
 SQL;
 
 $results = mysql_query($sql, $conn) or die('Something went wrong! ' . mysql_error());
+db_close();
 ?>
 
 <?php while (($line = mysql_fetch_array($results)) != null): ?>

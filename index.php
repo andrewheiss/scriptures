@@ -67,7 +67,7 @@ if ($bookname != "") // if a book is specified
 
 					echo "\t<div class='versenum'>$versenum</div>\n";
 					echo "\t<div id='v_$versenum' class='verse";
-					if ($versenum == 1) echo " selected";
+					if ($versenum == $verse) echo " selected";
 					echo "'>$versetext</div>\n";
 					echo "<input id='vtag_$versenum' type='hidden' />\n";
 					echo "\n";

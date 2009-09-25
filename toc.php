@@ -26,10 +26,10 @@ $volumesRS = mysql_query($sqlVolumes) or die("Could not run query: " . $sqlVolum
 		<ul class="books">
 	<?php $booksRS = mysql_query($sqlBooks . $volume['volume_id']) or die("Could not run query: " . $sqlBooks . $volume['volume_id'] . ' -- ' . mysql_error()); ?>
 	<?php while(($books = mysql_fetch_array($booksRS)) != null): ?>
-			<li><a href="<?php echo $siteroot . $books['lds_org']; ?>"><?php echo $books['book_title']; ?></a>
+			<li><a href="<?php echo $siteroot . '/' . $books['lds_org']; ?>"><?php echo $books['book_title']; ?></a>
 				<ul class="chapters">
 					<?php for($i = 1; $i <= $books['num_chapters']; $i++): ?>
-					<li><a href="<?php echo $siteroot . $books['lds_org'] . '/' . $i; ?>"><?php echo $i; ?></a></li>
+					<li><a href="<?php echo $siteroot . '/' . $books['lds_org'] . '/' . $i; ?>"><?php echo $i; ?></a></li>
 					<?php endfor; ?>
 				</ul>
 			</li>
