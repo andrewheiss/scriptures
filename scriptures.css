@@ -28,3 +28,5 @@ a#loclink										{ color: #000; font-size: 1.3em; border: none; font-weight: b
 #console_title									{ color: #fff; font-size: 1.3em; position: relative; top: -105px; } 
 #console_entry									{ margin-top: 15px; position: relative; top: -105px; }
 #console_input									{ color: #fff; font-size: 3em; border: none; text-align: center; background: transparent; letter-spacing: -0.02em; }
+
+#shroud											{ background: #000; position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.8; }
