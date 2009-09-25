@@ -28,10 +28,11 @@ SQL;
 
 $results = mysql_query($sql, $conn) or die('Something went wrong! ' . mysql_error());
 db_close();
-?>
+$rtn = array();
 
-<?php while (($line = mysql_fetch_array($results)) != null): ?>
-<pre>
-<?php print_r($line); ?>
-</pre>
-<?php endwhile; ?>
+while (($line = mysql_fetch_array($results)) != null)
+{
+	array_push($rtn, $line);
+}
+echo json_encode($rtn);
+?>
