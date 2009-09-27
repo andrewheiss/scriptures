@@ -5,6 +5,7 @@
 <head>
 	<title>The Book of Mormon</title>
 	<link rel="stylesheet" href="<?php echo $siteroot; ?>/scriptures.css" type="text/css" media="screen" title="Main stylesheet" charset="utf-8">
+	<link rel="shortcut icon" href="favicon.ico" />
 
 	<script src="<?php echo $siteroot; ?>/js/jquery-1.3.1.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="<?php echo $siteroot; ?>/js/jquery.hotkeys-0.7.8-packed.js" type="text/javascript" charset="utf-8"></script>
