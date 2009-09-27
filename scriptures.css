@@ -12,8 +12,8 @@ a#loclink										{ color: #000; font-size: 1.3em; border: none; font-weight: b
 
 #page 											{ width: 650px; margin: 0px auto; padding-top: 35px; }
 
-.verse											{ font-size: 1.4em; margin-bottom: .25em; line-height: 1.25em; letter-spacing: -0.015em; text-indent: 1.5em; margin-left: 60px; padding: 5px; }
-.versenum										{ font-size: 1.4em; color: #ccc; float: left; padding: 5px 0; }
+.verse											{ font-size: 1.35em; margin-bottom: 0.1em; line-height: 1.3em; letter-spacing: -0.005em; text-indent: 1.5em; margin-left: 50px; padding: 5px; }
+.versenum										{ font-size: 1.35em; color: #ccc; float: left; padding: 5px 0; }
 .context										{ font-size: 1.1em; color: #ccc; }
 
 #nav											{ width: 650px; margin: 0px auto; text-align: center; margin-bottom: 100px; border-top: solid 1px #ccc; padding-top: 15px; margin-top: 40px; font-family: "Lucida Grande", Arial, Helvetica; font-size: .7em; }
