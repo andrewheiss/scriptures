@@ -3,6 +3,7 @@ RewriteEngine On
 RewriteRule ^([^/\.]+)/?$ index.php?book=$1
 RewriteRule ^([^/\.]+)/([0-9]+)/?$ index.php?book=$1&chapter=$2
 RewriteRule ^([^/\.]+)/([0-9]+)/([0-9]+)/?$ index.php?book=$1&chapter=$2&verse=$3
+RewriteRule ^([^/\.]+)/([0-9]+)/([0-9]+-[0-9]+)/?$ index.php?book=$1&chapter=$2&verse=$3
 # RewriteRule ^index.php$ page.php?id=home
 
-ErrorDocument 404 index.php
+ErrorDocument 404 /index.php

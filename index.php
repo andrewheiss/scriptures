@@ -14,11 +14,20 @@ $bookname = trim($_GET["book"]);
 $chapter = trim($_GET["chapter"]);
 $verse = (isset($_GET["verse"])) ? trim($_GET['verse']) : "";
 
+$passage = false;
+if (strpos($verse, '-') !== false)
+{
+	$passage = true;
+	$pEnd = substr($verse, strpos($verse, '-') + 1);
+	$temp = substr($verse, 0, strpos($verse, '-'));
+	$verse = $temp;
+}
+
 $highlight = false;
 if ($verse != "") $highlight = true;
 
 if (!$chapter || $chapter < 1 || $chapter == "") $chapter = 1;
-if (!$verse || $verse < 1 || $verse == "") $verse = 1;
+if ((!$verse || $verse < 1 || $verse == "") && !$passage) $verse = 1;
 
 if ($bookname != "") // if a book is specified
 {
@@ -67,13 +76,6 @@ if ($bookname != "") // if a book is specified
 			<input type="text" id="console_input" name="console_input" />
 		</div>
 		<div id="console_dropdown">
-			<ul>
-				<li>1 Nephi</li>
-				<li class="sel">2 Nephi</li>
-				<li>3 Nephi</li>
-				<li>4 Nephi</li>
-				<li>Nehemiah</li>
-			</ul>
 		</div>
 	</div>
 
@@ -83,20 +85,29 @@ if ($bookname != "") // if a book is specified
 	
 	<div id="page">
 		<?php
+			$content = "";
 			if (sizeof($verses)) {
 				foreach ($verses as $the_verse) {
 					$versenum = $the_verse['verse'];
 					$versetext = $the_verse['verse_scripture'];
 
-					echo "\t<div class='versenum'>$versenum</div>\n";
-					echo "\t<div id='v_$versenum' class='verse";
-					if ($versenum == $verse) echo " selected";
-					if ($highlight && $versenum == $verse) echo " highlight";
-					echo "'>$versetext</div>\n";
-					echo "<input id='vtag_$versenum' type='hidden' />\n";
-					echo "\n";
+					$content .= "\t<div class='versenum'>$versenum</div>\n";
+					$content .= "\t<div id='v_$versenum' class='verse";
+					if ($versenum == $verse) $content .= " selected";
+					
+					if ($highlight && $versenum == $verse)
+					{
+						$content .= " highlight";
+						if ($passage && $verse != $pEnd)
+							$verse++;
+					}
+
+					$content .= "'>$versetext</div>\n";
+					$content .= "<input id='vtag_$versenum' type='hidden' />\n";
+					$content .= "\n";
 				}
 			}
+			echo $content;
 		?>
 	</div>
 

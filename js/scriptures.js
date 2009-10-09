@@ -1,7 +1,7 @@
 /* scriptures.js */
 /* Ben Crowder */
 
-
+var bookFound;
 $(document).ready(function() {
 	bindShortcuts();
 
@@ -9,6 +9,8 @@ $(document).ready(function() {
 
 	var vnum = parseInt($(".selected").attr("id").split('_')[1]);
 	scrollToVerse(vnum, true);
+
+	bookFound = false;
 });
 
 function bindShortcuts() {
@@ -103,6 +105,10 @@ function openConsole() {
 	// Clear out the text field
 	$("#console_input").val("");
 
+	// Add autocomplete to #console_input
+	// added by Chad Hansen
+	$("#console_input").bind('keydown', doAutocomplete);
+
 	unbindShortcuts();
 
 	// Unbind the g-key and bind the escape
@@ -111,6 +117,8 @@ function openConsole() {
 	$(document).bind('keydown', 'return', goToLoc);
 	$(document).bind('keydown', 'up', prevSel);
 	$(document).bind('keydown', 'down', nextSel);
+
+	bookfound = false;
 
 	return false;
 }
@@ -130,8 +138,53 @@ function closeConsole() {
 	return false;
 }
 
-function goToLoc() {
+// author: Chad Hansen
+function doAutocomplete(e) {
+	var input = $("#console_input").attr("value");
+	url = siterootfolder + "/autocomplete.php?query=" + input + String.fromCharCode(e.keyCode).toLowerCase();
+	if (!bookFound)
+	{
+		$.getJSON(url, function(data) {
+			var dropdown = $("#console_dropdown");
+			if (data.length > 1)
+			{
+				content = "<ul>";
+				for (i = 0; i < data.length; i++)
+				{
+					content += "<li>" + data[i].book_title + "</li>";
+				}
+				content += "</ul>";
+				dropdown.html(content);
+				dropdown.show();
+			}
+			else if (data.length == 0)
+			{
+				dropdown.html("<ul><li>No matches</li></ul>");
+				dropdown.show();
+			}
+			else
+			{
+				$("#console_input").attr("value", data[0].book_title + " ");
+				dropdown.html("");
+				dropdown.hide();
+				bookFound = true;
+			}
+		});
+	}
+	else
+	{
+		if (input == "")
+			bookFound = false;
+	}
+}
 
+// author: Chad Hansen
+function goToLoc() {
+	var query = $("#console_input").attr("value");
+	closeConsole();
+	$.getJSON(siterootfolder + "/getScriptureURL.php?query=" + query, function(data) {
+		window.location = siteroot + data;
+	});
 }
 
 function nextSel() {

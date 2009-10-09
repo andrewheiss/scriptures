@@ -5,6 +5,7 @@ $database = "dbname";
 $username = "username";
 $password = "password";
 
-$siteroot = "yoururlhere";
+$siteroot = "http://yoururlhere.com/path-to-app";
+$siterootfolder = "/path-to-app";
 
 ?>

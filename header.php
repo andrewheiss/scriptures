@@ -11,6 +11,7 @@
 	<script src="<?php echo $siteroot; ?>/js/scriptures.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 		var siteroot = "<?php echo $siteroot; ?>";
+		var siterootfolder = "<?php echo $siterootfolder; ?>";
 	</script>
 </head>
 
