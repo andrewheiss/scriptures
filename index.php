@@ -28,17 +28,7 @@ $highlight = false;
 if ($verse) $highlight = true;
 
 // Get permalink for this page
-$loclink = "$siteroot/$book";
-if ($chapter) $loclink .= "/$chapter";
-if ($verse) $loclink .= "/$verse";
-
-// If chapter/verse isn't specified, choose sane defaults
-// Highlight selected verse(s)
-$highlight = false;
-if ($verse) $highlight = true;
-
-// Get permalink for this page
-$loclink = "$siteroot/$book";
+$loclink = "$siteroot/$bookname";
 if ($chapter) $loclink .= "/$chapter";
 if ($verse) $loclink .= "/$verse";
 
@@ -52,7 +42,7 @@ if ($bookname != "") // if a book is specified
 
 	// First off, let's figure out what book we're in
 
-	$query = "SELECT book_id, book_title, volume_title_long, volume_subtitle, b.num_chapters FROM lds_scriptures_books b INNER JOIN lds_scriptures_volumes v ON v.volume_id = b.volume_id WHERE b.lds_org='$book'";
+	$query = "SELECT book_id, book_title, volume_title_long, volume_subtitle, b.num_chapters FROM lds_scriptures_books b INNER JOIN lds_scriptures_volumes v ON v.volume_id = b.volume_id WHERE b.lds_org='$bookname'";
 	$result = mysql_query($query) or die ("Couldn't run: $query");
 
 	$bookid = trim(mysql_result($result, 0, "book_id"));

@@ -182,9 +182,16 @@ function doAutocomplete(e) {
 function goToLoc() {
 	var query = $("#console_input").attr("value");
 	closeConsole();
-	$.getJSON(siterootfolder + "/getScriptureURL.php?query=" + query, function(data) {
-		window.location = siteroot + data;
-	});
+	if (query == "toc")
+	{
+		window.location = siteroot;
+	}
+	else
+	{
+		$.getJSON(siterootfolder + "/getScriptureURL.php?query=" + query, function(data) {
+			window.location = siteroot + data;
+		});
+	}
 }
 
 function nextSel() {
