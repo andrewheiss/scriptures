@@ -33,8 +33,9 @@ if ($chapter) $loclink .= "/$chapter";
 if ($verse) $loclink .= "/$verse";
 
 // If chapter/verse isn't specified, choose sane defaults
+// Highlight selected verse(s)
 $highlight = false;
-if ($verse != "") $highlight = true;
+if ($verse) $highlight = true;
 
 // Get permalink for this page
 $loclink = "$siteroot/$book";
