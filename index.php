@@ -23,9 +23,25 @@ if (strpos($verse, '-') !== false)
 	$verse = $temp;
 }
 
+// Highlight selected verse(s)
+$highlight = false;
+if ($verse) $highlight = true;
+
+// Get permalink for this page
+$loclink = "$siteroot/$book";
+if ($chapter) $loclink .= "/$chapter";
+if ($verse) $loclink .= "/$verse";
+
+// If chapter/verse isn't specified, choose sane defaults
 $highlight = false;
 if ($verse != "") $highlight = true;
 
+// Get permalink for this page
+$loclink = "$siteroot/$book";
+if ($chapter) $loclink .= "/$chapter";
+if ($verse) $loclink .= "/$verse";
+
+// If chapter/verse isn't specified, choose sane defaults
 if (!$chapter || $chapter < 1 || $chapter == "") $chapter = 1;
 if ((!$verse || $verse < 1 || $verse == "") && !$passage) $verse = 1;
 
@@ -35,7 +51,7 @@ if ($bookname != "") // if a book is specified
 
 	// First off, let's figure out what book we're in
 
-	$query = "SELECT book_id, book_title, volume_title_long, volume_subtitle, b.num_chapters FROM lds_scriptures_books b INNER JOIN lds_scriptures_volumes v ON v.volume_id = b.volume_id WHERE b.lds_org='$bookname'";
+	$query = "SELECT book_id, book_title, volume_title_long, volume_subtitle, b.num_chapters FROM lds_scriptures_books b INNER JOIN lds_scriptures_volumes v ON v.volume_id = b.volume_id WHERE b.lds_org='$book'";
 	$result = mysql_query($query) or die ("Couldn't run: $query");
 
 	$bookid = trim(mysql_result($result, 0, "book_id"));
@@ -81,7 +97,7 @@ if ($bookname != "") // if a book is specified
 
 	<div id="banner"><div id="banner_container"><?php echo $volume; ?><?php if ($volume_subtitle) { ?><div id="banner_subtitle"><?php echo $volume_subtitle; ?></div><?php } ?></div></div>
 	
-	<div id="loc"><a href="<?php echo $prevurl; ?>" id="prevlink">&laquo; Prev</a><a href="<?php echo $nexturl; ?>" id="nextlink">Next &raquo;</a><a href="index.php?chapter=<?php echo $chapter; ?>" id="loclink"><?php echo $booktitle; ?> <?php echo $chapter; ?></a></div>
+	<div id="loc"><a href="<?php echo $prevurl; ?>" id="prevlink">&laquo; Prev</a><a href="<?php echo $nexturl; ?>" id="nextlink">Next &raquo;</a><a href="<?php echo $loclink; ?>" id="loclink"><?php echo $booktitle; ?> <?php echo $chapter; ?></a></div>
 	
 	<div id="page">
 		<?php
