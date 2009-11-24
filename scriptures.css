@@ -5,6 +5,8 @@ body 											{ margin: 0; padding: 0; font-family: Calluna, Georgia; border-t
 
 #banner 										{ background: url(bannerbg.jpg) repeat-x; height: 75px; background: #2e2e50; color: #fff; }
 #banner_container								{ margin: 0px auto; width: 650px; text-align: center; font-size: 1.9em; padding-top: 10px; letter-spacing: -0.02em; }
+#banner_container a								{ color: #fff; text-decoration: none; }
+#banner_container a:hover						{ text-decoration: underline; }
 #banner_subtitle								{ font-size: .5em; font-variant: small-caps; letter-spacing: 0.02em; }
 
 #loc											{ width: 650px; margin: 0px auto; text-align: center; margin-top: 15px; color: #999; border-bottom: solid 1px #ccc; padding-bottom: 15px; }
@@ -21,7 +23,7 @@ a#loclink										{ color: #000; font-size: 1.3em; border: none; font-weight: b
 
 #nav											{ width: 650px; margin: 0px auto; text-align: center; margin-bottom: 100px; border-top: solid 1px #ccc; padding-top: 15px; margin-top: 40px; font-family: "Lucida Grande", Arial, Helvetica; font-size: .7em; }
 #nav a											{ color: #000; text-decoration: none; border-bottom: dotted 1px #000; }
-#aboutlink										{ margin-top: 5px; }
+#aboutlink										{ margin-top: 15px; }
 
 .selected										{ background: #f6f6f6 !important; -moz-border-radius: 5px; -khtml-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; }
 .highlight										{ background: #ffffcc; -moz-border-radius: 5px; -khtml-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; }
@@ -40,3 +42,13 @@ a#loclink										{ color: #000; font-size: 1.3em; border: none; font-weight: b
 #console_dropdown li.sel						{ background: #555; -moz-border-radius: 5px; -khtml-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; }
 
 #shroud											{ background: #000; position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.8; z-index: 50; }
+
+.volume h1										{ font-size: 24px; font-weight: normal; text-align: center; font-variant: small-caps; border-top: solid 1px #ddd; padding-top: 10px; margin-top: 10px; }
+ul.books										{ margin: 0; margin-bottom: 1em; padding-left: 0; clear: both; }
+ul.books a										{ text-decoration: none; }
+ul.books a:hover								{ text-decoration: underline; }
+ul.books > li									{ list-style: none; margin-bottom: 4px; clear: both; }
+ul.books > li label								{ width: 140px; float: left; text-align: right; }
+ul.books > li label	a							{ color: #000; }
+ul.chapters										{ list-style: none; margin-left: 115px; }
+ul.chapters li									{ display: inline; margin-right: 3px; }

@@ -21,7 +21,7 @@ function bindShortcuts() {
 	$(document).bind('keydown', 'k', prevVerse);
 
 	$(document).bind('keydown', 'r', randomChapter);
-	$(document).bind('keydown', 't', goToTOC);
+/*	$(document).bind('keydown', 't', goToTOC); */
 }
 
 function unbindShortcuts() {
@@ -141,7 +141,7 @@ function closeConsole() {
 // author: Chad Hansen
 function doAutocomplete(e) {
 	var input = $("#console_input").attr("value");
-	url = siterootfolder + "/autocomplete.php?query=" + input + String.fromCharCode(e.keyCode).toLowerCase();
+	url = siteroot + "/autocomplete.php?query=" + input + String.fromCharCode(e.keyCode).toLowerCase();
 	if (!bookFound)
 	{
 		$.getJSON(url, function(data) {
@@ -164,6 +164,7 @@ function doAutocomplete(e) {
 			}
 			else
 			{
+				// match found
 				$("#console_input").attr("value", data[0].book_title + " ");
 				dropdown.html("");
 				dropdown.hide();

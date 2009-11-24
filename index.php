@@ -86,7 +86,7 @@ if ($bookname != "") // if a book is specified
 		</div>
 	</div>
 
-	<div id="banner"><div id="banner_container"><?php echo $volume; ?><?php if ($volume_subtitle) { ?><div id="banner_subtitle"><?php echo $volume_subtitle; ?></div><?php } ?></div></div>
+	<div id="banner"><div id="banner_container"><a href="<?php echo $siteroot; ?>/"><?php echo $volume; ?></a><?php if ($volume_subtitle) { ?><div id="banner_subtitle"><?php echo $volume_subtitle; ?></div><?php } ?></div></div>
 	
 	<div id="loc"><a href="<?php echo $prevurl; ?>" id="prevlink">&laquo; Prev</a><a href="<?php echo $nexturl; ?>" id="nextlink">Next &raquo;</a><a href="<?php echo $loclink; ?>" id="loclink"><?php echo $booktitle; ?> <?php echo $chapter; ?></a></div>
 	
