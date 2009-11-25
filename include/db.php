@@ -12,5 +12,5 @@ function db_connect($host, $username, $password, $database) {
 }
 
 function db_close() {
-	mysql_close();
+	// mysql_close();
 }
