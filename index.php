@@ -53,7 +53,7 @@ if ($bookname != "") // if a book is specified
 
 	// Now get the verses
 
-	$query = "SELECT chapter, verse, verse_scripture FROM lds_scriptures_verses WHERE book_id=$bookid AND chapter=$chapter";
+	$query = "SELECT chapter, verse, verse_scripture, pilcrow FROM lds_scriptures_verses WHERE book_id=$bookid AND chapter=$chapter";
 	$result = mysql_query($query) or die ("Couldn't run: $query");
 
 	$verses = array();
@@ -97,6 +97,8 @@ if ($bookname != "") // if a book is specified
 				foreach ($verses as $the_verse) {
 					$versenum = $the_verse['verse'];
 					$versetext = $the_verse['verse_scripture'];
+					$pilcrow = ($the_verse['pilcrow']) ? "&para; " : ""; 
+					// TODO: Wrap paragraph marker in span with class so it can be toggled with javascript
 
 					$content .= "\t<div class='versenum'>$versenum</div>\n";
 					$content .= "\t<div id='v_$versenum' class='verse";
@@ -109,7 +111,7 @@ if ($bookname != "") // if a book is specified
 							$verse++;
 					}
 
-					$content .= "'>$versetext</div>\n";
+					$content .= "'>$pilcrow$versetext</div>\n";
 					$content .= "<input id='vtag_$versenum' type='hidden' />\n";
 					$content .= "\n";
 				}
