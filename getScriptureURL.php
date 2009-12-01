@@ -15,7 +15,7 @@ $sql =<<<SQL
 SQL;
 
 $results = mysql_query($sql, $conn) or die('Something went wrong! ' . mysql_error());
-db_close();
+db_close($conn);
 
 $line = mysql_fetch_array($results);
 $url = "/" . $line['lds_org'] . "/" . $query[1];

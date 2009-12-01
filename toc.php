@@ -2,7 +2,7 @@
 include_once('include/config.php');
 include_once('include/db.php');
 
-db_connect($host, $username, $password, $database);
+$conn = db_connect($host, $username, $password, $database);
 
 $sqlVolumes =<<<SQL
 	SELECT *
@@ -42,4 +42,4 @@ $volumesRS = mysql_query($sqlVolumes) or die("Could not run query: " . $sqlVolum
 </div>
 </div>
 <?php include("footer.php"); ?>
-<?php db_close(); ?>
+<?php db_close($conn); ?>
