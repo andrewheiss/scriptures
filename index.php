@@ -38,7 +38,7 @@ if ((!$verse || $verse < 1 || $verse == "") && !$passage) $verse = 1;
 
 if ($bookname != "") // if a book is specified
 {
-	db_connect($host, $username, $password, $database);
+	$conn = db_connect($host, $username, $password, $database);
 
 	// First off, let's figure out what book we're in
 
@@ -71,7 +71,7 @@ if ($bookname != "") // if a book is specified
 	$prevurl = "$siteroot/$bookname/$prevchapter";
 	$nexturl = "$siteroot/$bookname/$nextchapter";
 
-	db_close();
+	db_close($conn);
 
 	include("header.php");
 ?>
