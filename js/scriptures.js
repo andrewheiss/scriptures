@@ -16,6 +16,7 @@ $(document).ready(function() {
 function bindShortcuts() {
 	$(document).bind('keydown', 'n', nextChapter);
 	$(document).bind('keydown', 'p', prevChapter);
+	$(document).bind('keydown', 'z', togglePilcrows);
 
 	$(document).bind('keydown', 'j', nextVerse);
 	$(document).bind('keydown', 'k', prevVerse);
@@ -136,6 +137,12 @@ function closeConsole() {
 	bindShortcuts();
 
 	return false;
+}
+
+function togglePilcrows(argument) {
+	$('.pilcrow').animate({
+		'opacity' : 'toggle',
+	});
 }
 
 // author: Chad Hansen

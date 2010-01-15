@@ -52,3 +52,4 @@ ul.books > li label								{ width: 140px; float: left; text-align: right; }
 ul.books > li label	a							{ color: #000; }
 ul.chapters										{ list-style: none; margin-left: 115px; }
 ul.chapters li									{ display: inline; margin-right: 3px; }
+.pilcrow { font-size: .9em; }
