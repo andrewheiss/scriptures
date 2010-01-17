@@ -1,9 +1,18 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+<?php
+
+	// Build the title	
+	if (!$booktitle) {
+		$pagetitle = "The Scriptures";
+	} else {
+		$pagetitle = $booktitle . " " . $chapter . " - " . $volume;
+	}
+	
+?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
 	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-	<title>The Book of Mormon</title>
+	<title><?php echo $pagetitle; ?></title>
 	<link rel="stylesheet" href="<?php echo $siteroot; ?>/scriptures.css" type="text/css" media="screen" title="Main stylesheet" charset="utf-8">
 	<link rel="shortcut icon" href="favicon.ico" />
 

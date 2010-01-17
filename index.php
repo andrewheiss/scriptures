@@ -51,9 +51,21 @@ if ($bookname != "") // if a book is specified
 	$volume_subtitle = trim(mysql_result($result, 0, "volume_subtitle"));
 	$num_chapters = trim(mysql_result($result, 0, "num_chapters"));
 
+	// Check if there are any pilcrows in the chapter
+	
+	$query = "SELECT COUNT(pilcrow) as pilcrows FROM lds_scriptures_verses WHERE book_id=$bookid AND chapter=$chapter AND pilcrow = 1";
+	$result = mysql_query($query) or die ("Couldn't run: $query");
+	if (trim(mysql_result($result, 0, "pilcrows") == 0)) {
+		$pilcrow = false;
+	} else {
+		$pilcrow = true;
+		$pilcrow_sql = ", pilcrow";
+		$pilcrow_footer = "<br /><b>z</b> = toggle &para;s";
+	}
+	
 	// Now get the verses
-
-	$query = "SELECT chapter, verse, verse_scripture FROM lds_scriptures_verses WHERE book_id=$bookid AND chapter=$chapter";
+	
+	$query = "SELECT chapter, verse, verse_scripture $pilcrow_sql FROM lds_scriptures_verses WHERE book_id=$bookid AND chapter=$chapter";
 	$result = mysql_query($query) or die ("Couldn't run: $query");
 
 	$verses = array();
@@ -97,6 +109,9 @@ if ($bookname != "") // if a book is specified
 				foreach ($verses as $the_verse) {
 					$versenum = $the_verse['verse'];
 					$versetext = $the_verse['verse_scripture'];
+					if ($pilcrow) {
+						$pilcrow_html = ($the_verse['pilcrow']) ? "<span class=\"pilcrow\">&para; </span>" : "";
+					}
 
 					$content .= "\t<div class='versenum'>$versenum</div>\n";
 					$content .= "\t<div id='v_$versenum' class='verse";
@@ -109,7 +124,7 @@ if ($bookname != "") // if a book is specified
 							$verse++;
 					}
 
-					$content .= "'>$versetext</div>\n";
+					$content .= "'>$pilcrow_html$versetext</div>\n";
 					$content .= "<input id='vtag_$versenum' type='hidden' />\n";
 					$content .= "\n";
 				}
