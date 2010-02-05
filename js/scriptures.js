@@ -96,6 +96,12 @@ function scrollToVerse(vnum, forward) {
 	window.scroll(0, newY);
 }
 
+function togglePilcrows(argument) {
+	$('.pilcrow').animate({
+		'opacity' : 'toggle',
+	});
+}
+
 function openConsole() {
 	$("#shroud").fadeIn(100);
 	$("#console").fadeIn(100);
@@ -137,12 +143,6 @@ function closeConsole() {
 	bindShortcuts();
 
 	return false;
-}
-
-function togglePilcrows(argument) {
-	$('.pilcrow').animate({
-		'opacity' : 'toggle',
-	});
 }
 
 // author: Chad Hansen
