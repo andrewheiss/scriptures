@@ -28,6 +28,7 @@ function bindShortcuts() {
 function unbindShortcuts() {
 	$(document).unbind('keydown', 'n', nextChapter);
 	$(document).unbind('keydown', 'p', prevChapter);
+	$(document).unbind('keydown', 'z', togglePilcrows);
 
 	$(document).unbind('keydown', 'j', nextVerse);
 	$(document).unbind('keydown', 'k', prevVerse);
