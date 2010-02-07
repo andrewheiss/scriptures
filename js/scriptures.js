@@ -7,7 +7,7 @@ $(document).ready(function() {
 
 	$(document).bind('keydown', 'g', openConsole);
 
-	var vnum = parseInt($(".selected").attr("id").split('_')[1]);
+	var vnum = parseInt($(".selected").attr("id").split('_')[1], 10);
 	scrollToVerse(vnum, true);
 
 	bookFound = false;
@@ -54,7 +54,7 @@ function prevChapter() {
 }
 
 function nextVerse() {
-	var vnum = parseInt($(".selected").attr("id").split('_')[1]);
+	var vnum = parseInt($(".selected").attr("id").split('_')[1], 10);
 	var next = vnum + 1;
 
 	if ($("#v_" + next).length) {
@@ -63,7 +63,7 @@ function nextVerse() {
 }
 
 function prevVerse() {
-	var vnum = parseInt($(".selected").attr("id").split('_')[1]);
+	var vnum = parseInt($(".selected").attr("id").split('_')[1], 10);
 	var prev = vnum - 1;
 
 	if (prev > 0) {
@@ -84,12 +84,13 @@ function scrollToVerse(vnum, forward) {
 
 	var scrollspeed = 4;
 
+	var i;
 	if (forward) {
-		for (var i = oldY; i < newY; i += scrollspeed) {
+		for (i = oldY; i < newY; i += scrollspeed) {
 			window.scroll(0, i);
 		}
 	} else {
-		for (var i = oldY; i > newY; i -= scrollspeed) {
+		for (i = oldY; i > newY; i -= scrollspeed) {
 			window.scroll(0, i);
 		}
 	}
@@ -99,7 +100,7 @@ function scrollToVerse(vnum, forward) {
 
 function togglePilcrows(argument) {
 	$('.pilcrow').animate({
-		'opacity' : 'toggle',
+		'opacity' : 'toggle'
 	});
 }
 
