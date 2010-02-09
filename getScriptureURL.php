@@ -4,7 +4,37 @@ include("include/db.php");
 
 $conn = db_connect($host, $username, $password, $database);
 
-$query = explode(' ', $_REQUEST['query']);
+function parse_query($submitted_query) {
+	$query = explode(' ', $submitted_query);
+	
+	if (strcspn($query[0], '0123456789') == strlen($query[0])) {
+		# One word book title (ie. Jacob, James, Matthew)
+		$book = $query[0];
+		$chapter = $query[1];
+		
+		if ($query[1] && strcspn($query[1], '0123456789') == strlen($query[1])) {
+			# Two word book title (ie. Solomon's Song)
+			$book.= ' ' . $query[1];
+			$chapter = $query[2];
+			
+			if ($query[2] && strcspn($query[2], '0123456789') == strlen($query[2])) {
+				# Three word book title (ie. Doctrine and Covenants, Words of Mormon)
+				$book.= ' ' . $query[2];
+				$chapter = $query[3];
+			}
+		}
+	}
+	
+	if (strcspn($query[0], '0123456789') != strlen($query[0])) {
+		# Book that starts with a number (ie. 1 Nephi, 2 Corinthians, 3 John)
+		$book = $query[0] . ' ' . $query[1];
+		$chapter = $query[2];
+	}
+	
+	return array ($book, $chapter);
+} // End of parse_query()
+
+$query = parse_query($_REQUEST['query']);
 
 $book = mysql_escape_string($query[0]);
 

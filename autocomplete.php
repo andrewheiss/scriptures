@@ -4,9 +4,9 @@ include("include/db.php");
 
 $conn = db_connect($host, $username, $password, $database);
 
-$query = explode(' ', $_REQUEST['query']);
+$query = $_REQUEST['query'];
 
-$book = mysql_escape_string($query[0]);
+$book = mysql_escape_string($query);
 $num = mysql_escape_string((isset($_REQUEST['num'])) ? $_REQUEST['num'] : '5');
 
 /**

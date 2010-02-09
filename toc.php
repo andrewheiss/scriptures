@@ -19,6 +19,18 @@ SQL;
 $volumesRS = mysql_query($sqlVolumes) or die("Could not run query: " . $sqlVolumes . " -- " . mysql_error());
 ?>
 <?php include("header.php"); ?>
+
+<div id="shroud" style="display: none"></div>
+<div id="console" style="display: none">
+	<div id="console_back"></div>
+	<div id="console_entry">
+		<div id="console_title">Go to:</div>
+		<input type="text" id="console_input" name="console_input" />
+	</div>
+	<div id="console_dropdown">
+	</div>
+</div>
+
 <div id="banner"><div id="banner_container">The Standard Works<div id="banner_subtitle">The Book of Mormon, Bible, D&amp;C, and Pearl of Great Price</div></div></div>
 <div id="page">
 <div id="toc">
