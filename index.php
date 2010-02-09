@@ -78,11 +78,38 @@ if ($bookname != "") // if a book is specified
 	// Now figure out what comes before and after
 	if ($chapter > 1) $prevchapter = $chapter - 1;
 	if ($chapter + 1 <= $num_chapters) $nextchapter = $chapter + 1;
-	else $nextchapter = $chapter;
 
 	$prevurl = "$siteroot/$bookname/$prevchapter";
 	$nexturl = "$siteroot/$bookname/$nextchapter";
+	
+	// Take care of first and last chapters of each book and overwrite $prevurl or $nexturl accordingly
+	// FUTURE: maybe… make interbook next/previous links respect the overall book order (right now it goes OT, NT, BoM, D&C, PoGP, doesn't follow custom book order). Probably okay to just live with it.
+	
+	if ($chapter == 1) { // First chapter
+		$prev = $bookid - 1;
+		if ($prev > 0) {
+			$query = "SELECT lds_org, num_chapters FROM lds_scriptures_books WHERE book_id = $prev";
+			$result = mysql_query($query) or die ("Couldn't run: $query");
 
+			$prevbook = trim(mysql_result($result, 0, 'lds_org'));
+			$prevchapter = trim(mysql_result($result, 0, 'num_chapters'));
+			$prevurl = "$siteroot/$prevbook/$prevchapter";
+		}
+	}
+	
+	if ($chapter == $num_chapters) { // Last chapter
+		$next = $bookid + 1;
+		if ($next <= 87) { 
+			// Final book_id, Articles of Faith, hard coded in. Shouldn't be a problem until Standard Works are updated/expanded some day. Until then, 87 works better for performance.
+			$query = "SELECT lds_org FROM lds_scriptures_books WHERE book_id = $next";
+			$result = mysql_query($query) or die ("Couldn't run: $query");
+
+			$nextbook = trim(mysql_result($result, 0, 'lds_org'));
+			$nextchapter = 1;
+			$nexturl = "$siteroot/$nextbook/$nextchapter";
+		}
+	}
+	
 	db_close($conn);
 
 	include("header.php");
