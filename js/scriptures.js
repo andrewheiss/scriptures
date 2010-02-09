@@ -198,7 +198,7 @@ function goToLoc() {
 	}
 	else
 	{
-		$.getJSON(siterootfolder + "/getScriptureURL.php?query=" + query, function(data) {
+		$.getJSON(siteroot + "/getScriptureURL.php?query=" + query, function(data) {
 			window.location = siteroot + data;
 		});
 	}
