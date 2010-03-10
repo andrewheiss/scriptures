@@ -30,15 +30,12 @@ function parse_query($submitted_query) {
 		$book = $query[0] . ' ' . $query[1];
 		$chapter = $query[2];
 	}
-	
+
 	$get_verse = explode(':', $chapter);
-	
-	$result = array();
 	$result['book'] = $book;
 	$result['chapter'] = $get_verse[0];
 	$result['verse'] = $get_verse[1];
-	
-	return $result;
+
 } // End of parse_query()
 
 $query = parse_query($_REQUEST['query']);
