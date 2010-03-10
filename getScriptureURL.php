@@ -35,7 +35,8 @@ function parse_query($submitted_query) {
 	$result['book'] = $book;
 	$result['chapter'] = $get_verse[0];
 	$result['verse'] = $get_verse[1];
-
+	
+	return $result;
 } // End of parse_query()
 
 $query = parse_query($_REQUEST['query']);
