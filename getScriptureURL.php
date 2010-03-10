@@ -30,13 +30,18 @@ function parse_query($submitted_query) {
 		$book = $query[0] . ' ' . $query[1];
 		$chapter = $query[2];
 	}
-	
-	return array ($book, $chapter);
+
+	$get_verse = explode(':', $chapter);
+	$result['book'] = $book;
+	$result['chapter'] = $get_verse[0];
+	$result['verse'] = $get_verse[1];
+
+	return $result;	
 } // End of parse_query()
 
 $query = parse_query($_REQUEST['query']);
 
-$book = mysql_escape_string($query[0]);
+$book = mysql_escape_string($query['book']);
 
 $sql =<<<SQL
 	SELECT b.*
@@ -48,7 +53,8 @@ $results = mysql_query($sql, $conn) or die('Something went wrong! ' . mysql_erro
 db_close($conn);
 
 $line = mysql_fetch_array($results);
-$url = "/" . $line['lds_org'] . "/" . $query[1];
+$verse_url = ($query['verse']) ? '/' . $query['verse'] : "";
+$url = "/" . $line['lds_org'] . "/" . $query['chapter'] . $verse_url;
 
 echo json_encode($url);
 ?>
